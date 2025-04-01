@@ -12,32 +12,47 @@
   color: black; /* Change text color to black for better contrast */
 }
 
-.App-header {
-  text-align: center;
-  padding: 16pt;
+.App-container {
+  display: flex;
+  font-size: medium;
+  line-height: 160%;
+  height: 100vh;
 }
 
-.App-header a {
-  padding: 10px 20px;
-  margin: 0 10px;
-  background-color: darkred; /* Dark red button background */
-  color: white; /* White button text */
-  border-radius: 5px;
-  text-decoration: none;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-}
-.App-header a.active {
-  background-color: indianred; /* Lighter shade of red for active button */
-}
-
-.page {
-  background-color: #ffffff; /* Soft white */
-  min-height: 100vh;
+.App-sidebar {
+  width: 200px;
+  background-color: #f0f0f0;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  text-align: justify;
-  align-items: justify;
-  justify-content: justify;
-  font-size: calc(10px + 2vmin);
-  color: #343a40;
+}
+
+.App-sidebar a {
+  padding: 10px;
+  font-size: medium;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 5px;
+}
+
+.App-sidebar a.active {
+  background-color: #ddd;
+}
+
+.App-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .App-container {
+    flex-direction: column;
+  }
+
+  .App-sidebar {
+    width: 100%;
+    padding: 10px;
+  }
 }
