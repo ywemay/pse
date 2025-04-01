@@ -16,11 +16,14 @@
 .App-header a {
   padding: 10px 20px;
   margin: 0 10px;
-  background-color: #e9ecef; /* Light gray button background */
-  color: #495057; /* Dark gray button text */
+  background-color: darkred; /* Dark red button background */
+  color: white; /* White button text */
   border-radius: 5px;
   text-decoration: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+.App-header a.active {
+  background-color: indianred; /* Lighter shade of red for active button */
 }
 
 .Democracy {
