@@ -1,3 +1,48 @@
+.passport-generator-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #f4f4f9;
+}
+
+.passport-generator-header {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.passport-generator-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+}
+
+.passport-generator-form label {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.passport-generator-form input,
+.passport-generator-form button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.passport-generator-form button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.passport-generator-form button:hover {
+  background-color: #218838;
+}
 .App {
   background-color: #f8f9fa; /* Soft white */
   min-height: 100vh;

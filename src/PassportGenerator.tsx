@@ -47,9 +47,9 @@ function PassportGenerator() {
   };
 
   return (
-    <div>
-      <h1>Passport Generator</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="passport-generator-container">
+      <h1 className="passport-generator-header">Passport Generator</h1>
+      <form onSubmit={handleSubmit} className="passport-generator-form">
         <div>
           <label htmlFor="fullName">Full Name:</label>
           <input
