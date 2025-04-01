@@ -1,6 +1,9 @@
 .App {
   background-color: #f8f9fa; /* Soft white */
   min-height: 100vh;
+  margin: auto;
+  max-width: 900pt;
+  padding: 16pt;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,6 +14,7 @@
 
 .App-header {
   text-align: center;
+  padding: 16pt;
 }
 
 .App-header a {
@@ -26,24 +30,14 @@
   background-color: indianred; /* Lighter shade of red for active button */
 }
 
-.Democracy {
+.page {
   background-color: #ffffff; /* Soft white */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #343a40;
-}
-
-.Passport {
-  background-color: #ffffff; /* Soft white */
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  text-align: justify;
+  align-items: justify;
+  justify-content: justify;
   font-size: calc(10px + 2vmin);
   color: #343a40;
 }
