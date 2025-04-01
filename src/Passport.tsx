@@ -2,7 +2,7 @@ import React from 'react';
 
 function Passport() {
   return (
-    <div>
+    <div className="Passport">
       <h1>Passport</h1>
       <p>Welcome to the Passport page!</p>
     </div>
