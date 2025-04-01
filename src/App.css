@@ -1,36 +1,46 @@
 .App {
-  background-color: #282c34;
+  background-color: #f8f9fa; /* Soft white */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black; /* Change text color to black for better contrast */
 }
 
 .App-header {
   text-align: center;
 }
 
+.App-header a {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #e9ecef; /* Light gray button background */
+  color: #495057; /* Dark gray button text */
+  border-radius: 5px;
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
 .Democracy {
-  background-color: #f0f0f0;
+  background-color: #ffffff; /* Soft white */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: black;
+  color: #343a40;
 }
 
 .Passport {
-  background-color: #e0e0e0;
+  background-color: #ffffff; /* Soft white */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: black;
+  color: #343a40;
 }
