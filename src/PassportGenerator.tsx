@@ -41,6 +41,16 @@ function PassportGenerator() {
     if (photo) {
       calculateMd5(photo);
     }
+    const formData = {
+      fullName,
+      birthDate,
+      birthLocationLat,
+      birthLocationLng,
+      currentResidenceLat,
+      currentResidenceLng,
+    };
+
+    console.log('Form Data:', formData);
   };
 
   return (
