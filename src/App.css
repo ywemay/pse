@@ -23,6 +23,8 @@
 .passport-generator-form label {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
+  min-width: 200pt;
+  display: flex;
 }
 
 .passport-generator-form input,
@@ -100,4 +102,16 @@
     width: 100%;
     padding: 10px;
   }
+}
+
+.form-group {
+  border: 1px solid gray;
+  padding: 6pt;
+}
+.form-field {
+  padding: 6pt;
+}
+.form-field label {
+  margin-right: 6pt;
+  width: 300;
 }

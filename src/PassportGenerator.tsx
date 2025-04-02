@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { md5 } from 'js-md5'
 
 function PassportGenerator() {
   const [fullName, setFullName] = useState('');
@@ -14,36 +15,32 @@ function PassportGenerator() {
   };
 
   const calculateMd5 = async (file: File | null) => {
-    if (!file) return '';
+    if (!file) {
+      return '';
+    }
 
     const reader = new FileReader();
     reader.onload = async (event: any) => {
       const buffer = event.target.result;
       if (buffer) {
-        const md5 = await crypto.subtle.digest('MD5', buffer as BufferSource);
-        const hashArray = Array.from(new Uint8Array(md5));
-        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        console.log('MD5 Hash:', hashHex);
+        // const md5 = await crypto.digest('MD5', buffer as BufferSource);
+        const hash = await md5(buffer.toString());
+        // const hashArray = Array.from(new Uint8Array(md5));
+        // const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        console.log('MD5 Hash:', hash);
         // You can store or display the hash here
       }
+      else console.log('No buffer')
     };
     reader.readAsArrayBuffer(file as Blob);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    console.log('on submit')
     event.preventDefault();
     if (photo) {
       calculateMd5(photo);
     }
-    console.log('Form submitted', {
-      fullName,
-      birthDate,
-      birthLocationLat,
-      birthLocationLng,
-      photo,
-      currentResidenceLat,
-      currentResidenceLng,
-    });
   };
 
   return (
@@ -59,34 +56,37 @@ function PassportGenerator() {
             onChange={(e) => setFullName(e.target.value)}
           />
         </div>
-        <div>
-          <label htmlFor="birthDate">Birth Date:</label>
-          <input
-            type="date"
-            id="birthDate"
-            value={birthDate}
-            onChange={(e) => setBirthDate(e.target.value)}
-          />
+        <div className='form-group'>
+          <label>Birth:</label>
+          <div className='form-field'>
+            <label htmlFor="birthDate">Date:</label>
+            <input
+              type="date"
+              id="birthDate"
+              value={birthDate}
+              onChange={(e) => setBirthDate(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="birthLocationLat">Latitude:</label>
+            <input
+              type="number"
+              id="birthLocationLat"
+              value={birthLocationLat}
+              onChange={(e) => setBirthLocationLat(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="birthLocationLng">Longitude:</label>
+            <input
+              type="number"
+              id="birthLocationLng"
+              value={birthLocationLng}
+              onChange={(e) => setBirthLocationLng(e.target.value)}
+            />
+          </div>
         </div>
-        <div>
-          <label htmlFor="birthLocationLat">Birth Location Latitude:</label>
-          <input
-            type="number"
-            id="birthLocationLat"
-            value={birthLocationLat}
-            onChange={(e) => setBirthLocationLat(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="birthLocationLng">Birth Location Longitude:</label>
-          <input
-            type="number"
-            id="birthLocationLng"
-            value={birthLocationLng}
-            onChange={(e) => setBirthLocationLng(e.target.value)}
-          />
-        </div>
-        <div>
+        <div className="birth-info-container">
           <label htmlFor="photo">Photo:</label>
           <input
             type="file"
