@@ -23,20 +23,14 @@ function PassportGenerator() {
     reader.onload = async (event: any) => {
       const buffer = event.target.result;
       if (buffer) {
-        // const md5 = await crypto.digest('MD5', buffer as BufferSource);
         const hash = await md5(buffer.toString());
-        // const hashArray = Array.from(new Uint8Array(md5));
-        // const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         console.log('MD5 Hash:', hash);
-        // You can store or display the hash here
       }
-      else console.log('No buffer')
     };
     reader.readAsArrayBuffer(file as Blob);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    console.log('on submit')
     event.preventDefault();
     if (photo) {
       calculateMd5(photo);
@@ -50,7 +44,6 @@ function PassportGenerator() {
       currentResidenceLng,
     };
 
-    console.log('Form Data:', formData);
   };
 
   return (
