@@ -7,6 +7,7 @@ import Main from './Main';
 import Democracy from './Democracy';
 import PassportGenerator from './PassportGenerator';
 import Passport from './Passport';
+import Constitution from './Constitution';
 
 function App() {
   const location = useLocation();
@@ -15,6 +16,7 @@ function App() {
       <div className="App-container">
         <nav className="App-sidebar">
           <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Start</Link>
+          <Link to="/constitution" className={location.pathname === '/constitution' ? 'active' : ''}>Constitution</Link>
           <Link to="/democracy" className={location.pathname === '/democracy' ? 'active' : ''}>Emergent Democracy</Link>
           <Link to="/passport-generator" className={location.pathname === '/passport-generator' ? 'active' : ''}>Passport Generator</Link>
           <Link to="/passport" className={location.pathname === '/passport' ? 'active' : ''}>Passport of Human of Planet Earth</Link>
@@ -23,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/democracy" element={<Democracy />} />
+            <Route path="/constitution" element={<Constitution />} />
             <Route path="/passport" element={<Passport />} />
             <Route path="/passport-generator" element={<PassportGenerator />} />
           </Routes>
