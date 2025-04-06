@@ -1,33 +1,41 @@
 import React, { useState } from 'react';
 import { md5 } from 'js-md5';
+import { getFormattedDate } from './utils/date';
 
-interface FormData {
-  fullName: string;
-  birthDate: string;
-  birthLocationLat: string;
-  birthLocationLng: string;
-  gender: string;
-  weight: string;
-  height: string;
-  motherName: string;
-  motherBirthDate: string;
-  motherPassport: string;
-  fatherName: string;
-  fatherBirthDate: string;
-  fatherPassport: string;
-  phones: string;
-  emails: string;
-  education: string;
+const defaultPassport = {
+  human: {
+    name: '',
+    gender: '',
+    photo: { hash: '' },
+    birth: {
+      date: new Date(),
+      location: {
+        lt: '',
+        lg: '',
+        elevation: '',
+      }
+    },
+    // physics: {
+    //   weight: 70, //kg
+    //   height: 160, //cm
+    // },
+    // relatives: {
+    //   mother: { name: '', passport: ''},
+    //   father: { name: '', passport: ''}
+    // },
+    phones: [''],
+    emails: [''],
+  },
+  passport: {
+    created: {
+      at: new Date(),
+    }
+  }
 }
 
 function PassportGenerator() {
-  const [fullName, setFullName] = useState('');
-  const [birthDate, setBirthDate] = useState('');
-  const [birthLocationLat, setBirthLocationLat] = useState('');
-  const [birthLocationLng, setBirthLocationLng] = useState('');
   const [photo, setPhoto] = useState<File | null>(null);
-  const [currentResidenceLat, setCurrentResidenceLat] = useState('');
-  const [currentResidenceLng, setCurrentResidenceLng] = useState('');
+  const [data, setData ] = useState(defaultPassport);
 
   const handlePhotoChange = (event: any) => {
     setPhoto(event.target.files && event.target.files[0]);
@@ -37,7 +45,6 @@ function PassportGenerator() {
     if (!file) {
       return '';
     }
-
     const reader = new FileReader();
     reader.onload = async (event: any) => {
       const buffer = event.target.result;
@@ -49,40 +56,21 @@ function PassportGenerator() {
     reader.readAsArrayBuffer(file as Blob);
   };
 
-  const [formData, setFormData] = useState<FormData>({
-    fullName: '',
-    birthDate: '',
-    birthLocationLat: '',
-    birthLocationLng: '',
-    gender: '',
-    weight: '',
-    height: '',
-    motherName: '',
-    motherBirthDate: '',
-    motherPassport: '',
-    fatherName: '',
-    fatherBirthDate: '',
-    fatherPassport: '',
-    phones: '',
-    emails: '',
-    education: '',
-  });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (photo) {
       calculateMd5(photo);
     }
-    const formData = {
-      fullName,
-      birthDate,
-      birthLocationLat,
-      birthLocationLng,
-      currentResidenceLat,
-      currentResidenceLng,
-    };
-
   };
+
+  const setHumanField = (cb:(h:typeof data.human) => void) => {
+    setData(prev => {
+      const { human } = prev;
+      cb(human)
+      return {...prev, human};
+    })
+  }
 
   return (
     <>
@@ -94,16 +82,20 @@ function PassportGenerator() {
             <input
               type="text"
               id="fullName"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              value={data.human.name}
+              onChange={(e) => setHumanField((human) => {
+                human.name = e.target.value;
+              })}
             />
           </div>
           <div>
             <label htmlFor="gender">Gender:</label>
             <select
               id="gender"
-              value={formData.gender || ''}
-              onChange={(e) => setFormData({...formData, gender: e.target.value})}
+              value={data.human.gender || ''}
+              onChange={(e) => setHumanField((human) => {
+                human.gender = e.target.value;
+              })}
             >
               <option value="">Select Gender</option>
               <option value="M">Male</option>
@@ -112,103 +104,87 @@ function PassportGenerator() {
             </select>
           </div>
           <div>
-            <label htmlFor="weight">Weight (kg):</label>
-            <input
-              type="number"
-              id="weight"
-              value={formData.weight || ''}
-              onChange={(e) => setFormData({...formData, weight: e.target.value})}
-            />
-          </div>
-          <div>
-            <label htmlFor="height">Height (cm):</label>
-            <input
-              type="number"
-              id="height"
-              value={formData.height || ''}
-              onChange={(e) => setFormData({...formData, height: e.target.value})}
-            />
-          </div>
-          <div>
-            <label htmlFor="motherName">Mother's Full Name:</label>
-            <input
-              type="text"
-              id="motherName"
-              value={formData.motherName || ''}
-              onChange={(e) => setFormData({...formData, motherName: e.target.value})}
-            />
-          </div>
-          <div>
-            <label htmlFor="motherBirthDate">Mother's Birth Date:</label>
+            <label htmlFor="birthDate">Birth Date</label>
             <input
               type="date"
-              id="motherBirthDate"
-              value={formData.motherBirthDate || ''}
-              onChange={(e) => setFormData({...formData, motherBirthDate: e.target.value})}
+              id="birthDate"
+              value={getFormattedDate(data.human.birth.date || new Date())}
+              onChange={(e) => setHumanField((human) => {
+                human.birth.date = new Date(e.target.value);
+              })}
             />
           </div>
           <div>
-            <label htmlFor="motherPassport">Mother's Passport (MD5):</label>
-            <input
-              type="text"
-              id="motherPassport"
-              value={formData.motherPassport || ''}
-              onChange={(e) => setFormData({...formData, motherPassport: e.target.value})}
-            />
+            <label htmlFor="phones">Phones:</label>
+            { data.human.phones.map((phone, index) => {
+              return <div>
+                <input
+                  type="text"
+                  id={"phones" + index}
+                  value={data.human.phones[index] || ''}
+                  onChange={(e) => setHumanField((human) => {
+                    human.phones[index] = e.target.value;
+                  })}
+                />
+                {index > 0 && <input type='button' value={'Delete'} onClick={(e) => {
+                  e.preventDefault();
+                  setData( (prev) => {
+                    const phones = ([ ...data.human.phones ]).filter((_,i) => i !== index)
+                    const human = { ...data.human, phones};
+                    return { ...prev, human}
+                  })
+                }} />}
+              </div>
+            }
+            )
+          }
+          <div>
+            <input type='button' value={'Add another phone'} onMouseDown={(e) => {
+              e.preventDefault();
+              setData( (prev) => {
+                const phones = [...data.human.phones]
+                phones.push('');
+                const human = { ...data.human, phones};
+                return { ...prev, human}
+              })
+            }}/>
+            </div> 
           </div>
           <div>
-            <label htmlFor="fatherName">Father's Full Name:</label>
-            <input
-              type="text"
-              id="fatherName"
-              value={formData.fatherName || ''}
-              onChange={(e) => setFormData({...formData, fatherName: e.target.value})}
-            />
-          </div>
+            <label htmlFor="emails">Emails:</label>
+            { data.human.emails.map((_, index) => {
+              return <div>
+                <input
+                  type="text"
+                  id={"emails_" + index}
+                  value={data.human.emails[index] || ''}
+                  onChange={(e) => setHumanField((human) => {
+                    human.emails[index] = e.target.value;
+                  })}
+                />
+                {index > 0 && <input type='button' value={'Delete'} onClick={(e) => {
+                  e.preventDefault();
+                  setData( (prev) => {
+                    const emails = ([ ...data.human.emails ]).filter((_,i) => i !== index)
+                    const human = { ...data.human, emails};
+                    return { ...prev, human}
+                  })
+                }} />}
+              </div>
+            }
+            )
+          }
           <div>
-            <label htmlFor="fatherBirthDate">Father's Birth Date:</label>
-            <input
-              type="date"
-              id="fatherBirthDate"
-              value={formData.fatherBirthDate || ''}
-              onChange={(e) => setFormData({...formData, fatherBirthDate: e.target.value})}
-            />
-          </div>
-          <div>
-            <label htmlFor="fatherPassport">Father's Passport (MD5):</label>
-            <input
-              type="text"
-              id="fatherPassport"
-              value={formData.fatherPassport || ''}
-              onChange={(e) => setFormData({...formData, fatherPassport: e.target.value})}
-            />
-          </div>
-          <div>
-            <label htmlFor="phones">Phones (comma-separated):</label>
-            <input
-              type="text"
-              id="phones"
-              value={formData.phones || ''}
-              onChange={(e) => setFormData({...formData, phones: e.target.value})}
-            />
-          </div>
-          <div>
-            <label htmlFor="emails">Emails (comma-separated):</label>
-            <input
-              type="text"
-              id="emails"
-              value={formData.emails || ''}
-              onChange={(e) => setFormData({...formData, emails: e.target.value})}
-            />
-          </div>
-          <div>
-            <label htmlFor="education">Education (comma-separated):</label>
-            <input
-              type="text"
-              id="education"
-              value={formData.education || ''}
-              onChange={(e) => setFormData({...formData, education: e.target.value})}
-            />
+            <input type='button' value={'Add another email'} onMouseDown={(e) => {
+              e.preventDefault();
+              setData( (prev) => {
+                const emails = [...data.human.emails]
+                emails.push('');
+                const human = { ...data.human, emails};
+                return { ...prev, human}
+              })
+            }}/>
+            </div> 
           </div>
           <button type="submit">Generate Passport</button>
         </form>
