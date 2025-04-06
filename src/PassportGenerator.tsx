@@ -76,8 +76,9 @@ function PassportGenerator() {
     <>
       <div className="passport-generator-container">
         <h1 className="passport-generator-header">Passport Generator</h1>
+        <p>This form allows one to create a Human of Earth Passport file in yaml format. It does not send or collect any data. The resulted files and data is to be stored on your computer.</p>
         <form onSubmit={handleSubmit} className="passport-generator-form">
-          <div>
+          <div className='form-field'>
             <label htmlFor="fullName">Full Name:</label>
             <input
               type="text"
@@ -88,7 +89,15 @@ function PassportGenerator() {
               })}
             />
           </div>
-          <div>
+          <div className='form-field'>
+            <label htmlFor='photo'>Passport Photo:</label>
+            <input
+              type='file'
+              accept='image/png,image/jpg,image/jpeg'
+              onChange={e => handlePhotoChange(e)}
+              />
+          </div>
+          <div className='form-field'>
             <label htmlFor="gender">Gender:</label>
             <select
               id="gender"
@@ -103,7 +112,7 @@ function PassportGenerator() {
               <option value="O">Other</option>
             </select>
           </div>
-          <div>
+          <div className='form-field'>
             <label htmlFor="birthDate">Birth Date</label>
             <input
               type="date"
@@ -114,7 +123,7 @@ function PassportGenerator() {
               })}
             />
           </div>
-          <div>
+          <div className='form-field'>
             <label htmlFor="phones">Phones:</label>
             { data.human.phones.map((phone, index) => {
               return <div>
@@ -138,7 +147,7 @@ function PassportGenerator() {
             }
             )
           }
-          <div>
+          <div className='form-field'>
             <input type='button' value={'Add another phone'} onMouseDown={(e) => {
               e.preventDefault();
               setData( (prev) => {
@@ -150,7 +159,7 @@ function PassportGenerator() {
             }}/>
             </div> 
           </div>
-          <div>
+          <div className='form-field'>
             <label htmlFor="emails">Emails:</label>
             { data.human.emails.map((_, index) => {
               return <div>
@@ -174,7 +183,7 @@ function PassportGenerator() {
             }
             )
           }
-          <div>
+          <div className='form-field'>
             <input type='button' value={'Add another email'} onMouseDown={(e) => {
               e.preventDefault();
               setData( (prev) => {

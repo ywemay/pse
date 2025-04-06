@@ -17,7 +17,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 400px;
 }
 
 .passport-generator-form label {
@@ -44,6 +43,10 @@
 
 .passport-generator-form button:hover {
   background-color: #218838;
+}
+
+.form-field {
+  padding: 3pt;
 }
 .App {
   background-color: #f8f9fa; /* Soft white */
@@ -114,4 +117,7 @@
 .form-field label {
   margin-right: 6pt;
   width: 300;
+}
+.page {
+  padding-bottom: 12pt;
 }

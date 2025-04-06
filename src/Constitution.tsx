@@ -1,8 +1,10 @@
+import { md5 } from 'js-md5';
 import React, { useState, useEffect } from 'react';
 import Markdown from 'react-markdown';
 
 function Constitution() {
   const [markdown, setMarkdown] = useState('');
+  const [ hash, setHash ] = useState('');
 
   useEffect(() => {
     async function loadMarkdown() {
@@ -12,6 +14,7 @@ function Constitution() {
           throw new Error(`Failed to fetch constitution.md: ${response.status}`);
         }
         const text = await response.text();
+        setHash(md5(text));
         setMarkdown(text);
       } catch (error) {
         console.error('Error loading constitution.md:', error);
@@ -23,12 +26,8 @@ function Constitution() {
 
   return (
     <div className="page">
-      <h1>Constitution of Humans of Planet Earth.</h1>
-
-      <p><b>Version 0.0.0</b></p>
-
-      <p>Disclaimer: this version is highly rudimentary and opinionated.</p>
       <Markdown>{markdown}</Markdown>
+      <p><b>Hash:</b> {hash}</p>
     </div>
   );
 }
