@@ -2,8 +2,14 @@ import { md5 } from 'js-md5';
 import React, { useState, useEffect } from 'react';
 import Markdown from 'react-markdown';
 
+const seo = {
+  title: "Constitution of Humans of Planet Earth",
+  description: "A vision of The Constitution of Humans of Planet Earth, outlining principles of human interaction, access to resources, conflict resolution, and more.",
+  keywords: "constitution, humans, earth, universe, principles, resources, conflict resolution, vision",
+}
+
 function Constitution() {
-  const [markdown, setMarkdown] = useState('');
+  const [ markdown, setMarkdown ] = useState('');
   const [ hash, setHash ] = useState('');
 
   useEffect(() => {
