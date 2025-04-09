@@ -13,6 +13,9 @@ function App() {
   const location = useLocation();
   return (
     <div className="App">
+      <div className='app-header'>
+        Post Scarcity Economy (vision)
+      </div>
       <div className="App-container">
         <nav className="App-sidebar">
           <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Start</Link>
