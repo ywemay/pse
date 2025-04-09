@@ -6,7 +6,7 @@
 
 ## Preamble
 
-We, the people of Earth and the universe we inhabit, united by our shared humanity, hereby establish this Constitution to ensure the prosperity, happiness, and well-being of all individuals within our global community.
+We, the humans of Earth and the universe we inhabit, united by our shared humanity, hereby establish this Constitution to ensure the prosperity, happiness, and well-being of all humans within our global community.
 
 ## Article I: Principles of Human Interaction
 
@@ -16,13 +16,13 @@ We, the people of Earth and the universe we inhabit, united by our shared humani
 
 ## Article II: Access to Resources
 
-1. **Common Patrimony**: All Earth's resources and those accessible in space are considered common patrimony for all humans.
+1. **Common Patrimony**: All Earth's resources and those accessible in space are common patrimony for all humans.
 2. **Sharing and Cooperation**: Share space and objects when and where applicable, promoting cooperation and mutual aid.
 3. **Automation and Production**: Utilize automation of production and distribution of goods and services to ensure availability, efficiency and fairness.
 
 ## Article III: Conflict Resolution
 
-1. **Emergent Democracy**: Employ emergent democracy as a tool for social administration, fostering participatory decision-making and conflict resolution.
+1. **Emergent Democracy**: Employ emergent democracy as a tool for social administration, fostering participatory decision-making and conflict resolution. Note: emergent democracy is a system that allows online 24/24h all the time available voting/un-voting system. It's source code, run time code and data shall be available for open reading to all humans all the time.
 2. **Conflict Resolution Strategies**: In conflict situations, seek solutions that bridge differences between parties, prioritizing cooperation over competition.
 3. **Logical Dispute Resolution**: Use logical reasoning to resolve disputes, avoiding emotional or coercive approaches.
 4. **Freedom to Carry Tools**: Humans of Planet Earth are free to carry any tools, including arms, for their work, activities, personal protection and self-defense.
