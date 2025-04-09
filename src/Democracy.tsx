@@ -3,6 +3,7 @@ import React from 'react';
 function Democracy() {
   return (
     <div className="page">
+      <img src="/assets/democracy_00018_.png" alt="Logo" />
       <h1>Emergent Democracy</h1>
       <p>
         Emergent democracy is the process of auto administration of society In which humans vote openly 24/24 on a project provided by a entity, a human or a management system system. Of course, humans choose at their will to participate or not to certain project. And even voters that already placed their vote - can change or cancel it at any point in time.

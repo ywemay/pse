@@ -25,6 +25,8 @@ function Constitution() {
   }, []);
 
   return <div className="page">
+
+    <img src="/assets/constitution_00027.png" alt="Logo" />
     <Markdown>{markdown}</Markdown>
     <p><b>Hash:</b> {hash}</p>
   </div>

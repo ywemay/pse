@@ -14,11 +14,11 @@ function App() {
   return (
     <div className="App">
       <div className='app-header'>
+        <Link to="/"> <img src="/assets/logo_002.png" alt="Logo" /> </Link>
         Post Scarcity Economy (vision)
       </div>
       <div className="App-container">
         <nav className="App-sidebar">
-          <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Start</Link>
           <Link to="/constitution" className={location.pathname === '/constitution' ? 'active' : ''}>Constitution</Link>
           <Link to="/democracy" className={location.pathname === '/democracy' ? 'active' : ''}>Emergent Democracy</Link>
           <Link to="/passport-generator" className={location.pathname === '/passport-generator' ? 'active' : ''}>Passport Generator</Link>

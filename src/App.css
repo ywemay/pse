@@ -105,6 +105,7 @@
     width: 100%;
     padding: 10px;
   }
+  
 }
 
 .form-group {
@@ -120,4 +121,25 @@
 }
 .page {
   padding-bottom: 12pt;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.app-header img {
+  height: 50px; /* Adjust the height as needed */
+  margin-right: 10px; /* Add some spacing between the logo and the text */
+}
+
+/* Ensure the header takes up the full width on smaller screens */
+@media (max-width: 768px) {
+  .app-header {
+    width: 100%;
+  }
 }
