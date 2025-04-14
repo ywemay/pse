@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { md5 } from 'js-md5';
 import { getFormattedDate } from './utils/date';
+import encrypt from './utils/encrypt';
+import crypto from 'node:crypto'
 
 const defaultPassport = {
   human: {
@@ -49,8 +51,14 @@ function PassportGenerator() {
     reader.onload = async (event: any) => {
       const buffer = event.target.result;
       if (buffer) {
-        const hash = await md5(buffer.toString());
-        console.log('MD5 Hash:', hash);
+        const str = buffer.toString();
+        const hash = await md5(str);
+        const key = crypto.randomBytes(32).toString('base64');
+        const encrypted = encrypt(str, key);
+        console.log('MD5 Hash:', {
+          hash,
+          encrypted
+      });
       }
     };
     reader.readAsArrayBuffer(file as Blob);
@@ -126,7 +134,7 @@ function PassportGenerator() {
           <div className='form-field'>
             <label htmlFor="phones">Phones:</label>
             { data.human.phones.map((phone, index) => {
-              return <div>
+              return <div key={`phone-container-${index}`}>
                 <input
                   type="text"
                   id={"phones" + index}
@@ -162,7 +170,7 @@ function PassportGenerator() {
           <div className='form-field'>
             <label htmlFor="emails">Emails:</label>
             { data.human.emails.map((_, index) => {
-              return <div>
+              return <div key={`email-container-${index}`}>
                 <input
                   type="text"
                   id={"emails_" + index}
